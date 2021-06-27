@@ -1,12 +1,17 @@
-import "./App.css";
+import { useState } from "react";
+
 import Editor from "./components/Editor/Editor";
+import Header from "./components/Header/Header";
+
+import "./App.css";
+
 import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-tomorrow_night_blue";
 import "ace-builds/webpack-resolver";
-import { useState } from "react";
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faPlay,
@@ -14,7 +19,6 @@ import {
   faCogs,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import Header from "./components/Header/Header";
 library.add(faPlay, faFileDownload, faGithub, faCogs);
 
 function App() {
@@ -25,6 +29,10 @@ function App() {
   const [theme, setTheme] = useState("dark");
   const [layout, setLayout] = useState("vertical");
 
+  /**
+   *Function Handler that previews the output when clicks on run button
+   *
+   */
   const setOutputHandler = () => {
     const output = `
       <html>
@@ -42,25 +50,38 @@ function App() {
     setOutputValue(output);
   };
 
+  /**
+   *Function Handler that toggles between dark and light mode
+   *
+   */
   const setThemeHandler = () => {
     theme === "dark" ? setTheme("light") : setTheme("dark");
   };
 
+  /**
+   *Function Handler that toggles between horizontal and vertical modes
+   *
+   */
   const setLayoutHandler = () => {
     layout === "horizontal" ? setLayout("vertical") : setLayout("horizontal");
   };
 
+  /**
+   *Function Handler that downloads the code written.
+   *
+   */
   const onClickDownloadHandler = (value) => {
     if (value.length === 0) {
       return;
     }
-    var HTMLhiddenElement = document.createElement("a");
+    let HTMLhiddenElement = document.createElement("a");
 
     HTMLhiddenElement.href = "data:attachment/text," + encodeURI(value);
     HTMLhiddenElement.target = "_blank";
     HTMLhiddenElement.download = "download.txt";
     HTMLhiddenElement.click();
   };
+
   return (
     <div className="App  w-screen h-screen" style={{ background: "#383c48" }}>
       <Header

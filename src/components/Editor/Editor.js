@@ -18,8 +18,6 @@ export default function Editor({
         value={value}
       />
       <AceEditor
-        /* width="100%"
-        height="100%" */
         height="auto"
         style={{
           minHeight: "320px",
