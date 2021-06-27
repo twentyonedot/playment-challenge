@@ -1,15 +1,39 @@
 import React from "react";
 import AceEditor from "react-ace";
+import EditorHeader from "../EditorHeader/EditorHeader";
 
-export default function Editor({ type, theme, value, onChange, identifier }) {
+export default function Editor({
+  mode,
+  theme,
+  value,
+  onChange,
+  identifier,
+  onClickDownload,
+}) {
   return (
-    <AceEditor
-      mode={type}
-      theme={theme}
-      onChange={onChange}
-      value={value}
-      name={identifier}
-      editorProps={{ $blockScrolling: true }}
-    />
+    <div>
+      <EditorHeader
+        mode={mode}
+        onClickDownload={onClickDownload}
+        value={value}
+      />
+      <AceEditor
+        /* width="100%"
+        height="100%" */
+        height="auto"
+        style={{
+          minHeight: "320px",
+          borderBottomLeftRadius: "10px",
+          borderBottomRightRadius: "10px",
+        }}
+        width="auto"
+        mode={mode}
+        theme={theme}
+        onChange={onChange}
+        value={value}
+        name={identifier}
+        editorProps={{ $blockScrolling: true }}
+      />
+    </div>
   );
 }
