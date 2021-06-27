@@ -78,6 +78,7 @@ function App() {
         }
       >
         <div
+          style={layout === "vertical" ? { height: "calc(100vw - 5rem)" } : {}}
           className={
             layout === "horizontal"
               ? `grid grid-cols-3 gap-2 mt-2`
